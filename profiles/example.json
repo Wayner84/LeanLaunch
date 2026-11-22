@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "example",
+  "displayName": "Example - Notepad",
+  "executable": "%WINDIR%\\System32\\notepad.exe",
+  "arguments": [],
+  "workingDirectory": "%USERPROFILE%",
+  "services": [],
+  "residualProcesses": [],
+  "waitForProcessNames": [],
+  "cleanup": {
+    "stopStartedServices": true,
+    "stopResidualProcesses": true
+  }
+}

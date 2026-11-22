@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "solidworks-example",
+  "displayName": "SOLIDWORKS (template - audit before use)",
+  "executable": "%ProgramFiles%\\SOLIDWORKS Corp\\SOLIDWORKS\\SLDWORKS.exe",
+  "arguments": [],
+  "workingDirectory": "%USERPROFILE%\\Documents",
+  "services": [],
+  "residualProcesses": [],
+  "waitForProcessNames": ["SLDWORKS"],
+  "cleanup": {
+    "stopStartedServices": true,
+    "stopResidualProcesses": true
+  }
+}

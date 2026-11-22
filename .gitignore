@@ -1,0 +1,20 @@
+# Runtime data and local profiles
+.data/
+snapshots/
+*.local.json
+
+# Test/build output
+TestResults/
+coverage/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vs/
+.vscode/
+.idea/
+
+# Secrets
+.env
+*.key
+*.pem

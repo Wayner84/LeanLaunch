@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "office-example",
+  "displayName": "Microsoft Word (template - audit before use)",
+  "executable": "%ProgramFiles%\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+  "arguments": [],
+  "workingDirectory": "%USERPROFILE%\\Documents",
+  "services": [],
+  "residualProcesses": [],
+  "waitForProcessNames": [],
+  "cleanup": {
+    "stopStartedServices": true,
+    "stopResidualProcesses": true
+  }
+}

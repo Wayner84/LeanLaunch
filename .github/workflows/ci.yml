@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run PowerShell 5.1 tests
+        shell: powershell
+        run: |
+          $pester = Get-Module -ListAvailable Pester | Where-Object Version -eq '3.4.0'
+          if (-not $pester) {
+            Install-Module Pester -RequiredVersion 3.4.0 -Scope CurrentUser -Force -SkipPublisherCheck
+          }
+          Import-Module Pester -RequiredVersion 3.4.0 -Force
+          & .\tests\Run-Tests.ps1
+      - name: Smoke-test CLI
+        shell: powershell
+        run: |
+          & .\leanlaunch.ps1 doctor
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & .\leanlaunch.ps1 show example
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
