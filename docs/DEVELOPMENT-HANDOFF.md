@@ -1,6 +1,6 @@
 # LeanLaunch Development Handoff
 
-**Updated: November 23, 2026. Status: READY FOR CONTROLLED PILOT (not a public release).** This supersedes the historical PAUSED / DO NOT INSTALL checkpoint preserved below. Wayne explicitly requested development to resume. No real installation, Office audit, service control, UAC approval, or publication was performed in this pass. The checkout remains uncommitted on `main` at archive commit `461b4b6`; no push was made.
+**Updated: November 23, 2026. Status: READY FOR CONTROLLED PILOT (not a public release).** This supersedes the historical PAUSED / DO NOT INSTALL checkpoint preserved below. Wayne explicitly requested development to resume and then authorised a development-source push. The reviewed candidate was committed locally as `362f86eda9a042ccfe19c5cc934b3f4efa0636d7` after a final 300/300 PowerShell 5.1 run and staged whitespace check. Verify the remote branch and its CI run before relying on publication. No real installation, Office audit, service control or UAC approval was performed.
 
 ## Current checkpoint and evidence
 
