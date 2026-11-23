@@ -482,11 +482,11 @@ function Undo-LeanLaunchPartialInstall {
         try {
             Assert-LeanLaunchNoReparseInPath $dir
             if (Test-Path -LiteralPath $dir -PathType Container) {
-                $remaining = @(Get-ChildItem -LiteralPath $dir -Force -ErrorAction SilentlyContinue)
-                if ($remaining.Count -eq 0) { Remove-Item -LiteralPath $dir -Force -ErrorAction SilentlyContinue }
+                $remaining = @(Get-ChildItem -LiteralPath $dir -Force -ErrorAction Stop)
+                if ($remaining.Count -eq 0) { Remove-Item -LiteralPath $dir -Force -ErrorAction Stop }
             }
         }
-        catch { }
+        catch { [void]$unrestored.Add("data directory '$dir'") }
     }
 
     # install-record.json lives in the shared data root, not under $InstallRoot, so unlike the

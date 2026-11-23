@@ -1,12 +1,7 @@
 . (Join-Path $PSScriptRoot 'TestHelpers.ps1')
 
 if (-not ('LeanLaunchTestNative.NativeMethods' -as [type])) {
-    Add-Type -Namespace LeanLaunchTestNative -Name NativeMethods -MemberDefinition @'
-[DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-public static extern Microsoft.Win32.SafeHandles.SafeFileHandle CreateFile(
-    string lpFileName, uint dwDesiredAccess, uint dwShareMode, IntPtr lpSecurityAttributes,
-    uint dwCreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile);
-'@
+    Add-Type -Path (Join-Path $PSScriptRoot 'LeanLaunchTestNative.cs') | Out-Null
 }
 
 function Lock-LeanLaunchDirectoryHandle {

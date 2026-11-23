@@ -1,5 +1,14 @@
 # LeanLaunch
 
+## Getting Started (GUI Recommended)
+
+> **Controlled pilot only.** Complete the [release checks](docs/DEVELOPMENT-HANDOFF.md) before installing or auditing a real application. Nothing is managed automatically.
+
+1. After an approved pilot install, run `leanlaunch gui` and choose **New application**. Enter the application's name and executable path; it starts **Unmanaged**.
+2. On the **Audit** tab, click **Before-install scan**, install or update the application, let it settle, then click **After-install scan**.
+3. Review every row in the classification grid. Select each resource, inspect its evidence and path, choose a decision, and click **Save classification**. Do not mark shared or uncertain resources Managed; startup entries and scheduled tasks cannot be Managed.
+4. When all candidates are reviewed, click **Build profile from reviewed**. Inspect the resulting profile and use **Dry run / action plan** before opting into Managed policy or launching.
+
 **Launch heavyweight Windows applications only with the resources they need—then clean up the resources they leave behind.**
 
 LeanLaunch is a zero-resident-footprint Windows CLI and desktop GUI for people who want CAD, EDA, slicing, rendering, Office, and other large applications available without allowing every vendor helper to run all day.
@@ -18,9 +27,9 @@ It is built around an evidence-first workflow:
 
 LeanLaunch installs **no Windows service, scheduled task, startup item, tray process, daemon, updater, or telemetry component**. The command (CLI or GUI) exists only while capturing a snapshot, showing a window, or supervising a launched application — closing it ends the process completely.
 
-## Status — development snapshot, not ready to install
+## Status — ready for a controlled pilot, not a public release
 
-This public repository is a **work-in-progress checkpoint for further development**, not a release or a controlled pilot. The latest local PowerShell 5.1 suite has **299 passing tests and one failing installer rollback regression** (the newly created data-directory cleanup failure is not reported as expected). Installer rollback needs investigation and a fresh independent safety review before any real installation or application audit. See [development handoff](docs/DEVELOPMENT-HANDOFF.md). Do not use the install instructions below yet.
+On November 23, 2026, Windows PowerShell 5.1 tests passed **300/300** (zero failed/skipped/pending), including the installer rollback regression. An isolated install/doctor/Office-template dry run/uninstall passed without changing the real user PATH or services. **Controlled pilot** means a supervised, explicitly reviewed trial—not a blanket recommendation to install on production machines. The real Office audit, PowerToys launch, controlled UAC check, and post-pilot residue verification remain manual gates before public release. See the [development handoff](docs/DEVELOPMENT-HANDOFF.md).
 
 The snapshot/diff collectors, the application-record audit workflow with a Managed/Unmanaged policy toggle, profile generation from reviewed resources, managed launch with identity-bound cleanup, a WPF desktop GUI, the installer/uninstaller, tests, and Command Palette integration are all in place. Community application profiles should be treated as reviewable starting points, not universal truth.
 
@@ -70,6 +79,10 @@ leanlaunch gui
 ```
 
 See [the full application audit workflow](docs/APP-AUDIT-WORKFLOW.md) for what every step does and why, including the safety rules around startup entries and scheduled tasks.
+
+## Further reading
+
+Browse the [documentation index](docs/INDEX.md) for the audit workflow, profile schema, Command Palette integration, and development/release handoff.
 
 ## Commands
 

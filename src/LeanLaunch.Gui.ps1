@@ -14,28 +14,7 @@ Add-Type -AssemblyName Microsoft.VisualBasic | Out-Null
 # non-interruptible native/.NET call. Perform that teardown on a background CLR thread and join it only
 # for a caller-supplied bound; GUI close therefore never synchronously inherits an unbounded method.
 if ($null -eq ('LeanLaunch.GuiBoundedCleanup' -as [type])) {
-    Add-Type -TypeDefinition @'
-using System;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
-using System.Threading;
-namespace LeanLaunch {
-    public static class GuiBoundedCleanup {
-        public static bool Run(PowerShell pipeline, Runspace runspace, int timeoutMilliseconds) {
-            Thread worker = new Thread(() => {
-                try { pipeline.Stop(); } catch { }
-                try { pipeline.Dispose(); } catch { }
-                try { runspace.Close(); } catch { }
-                try { runspace.Dispose(); } catch { }
-            });
-            worker.IsBackground = true;
-            worker.Name = "LeanLaunch bounded GUI scan cleanup";
-            worker.Start();
-            return worker.Join(Math.Max(0, timeoutMilliseconds));
-        }
-    }
-}
-'@ | Out-Null
+    Add-Type -Path (Join-Path $PSScriptRoot 'GuiBoundedCleanup.cs') | Out-Null
 }
 
 if (-not (Get-Command -Name New-LeanLaunchApplication -ErrorAction SilentlyContinue)) {
