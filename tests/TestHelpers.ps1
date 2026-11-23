@@ -2,6 +2,10 @@ $ProjectRoot = Split-Path -Parent $PSScriptRoot
 $ModulePath = Join-Path $ProjectRoot 'LeanLaunch.psd1'
 $FixtureRoot = Join-Path $env:TEMP ('LeanLaunchTests-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $FixtureRoot -Force | Out-Null
+# CI may expose %TEMP% through an 8.3 alias (RUNNER~1), while the filesystem
+# returns long paths for saved files. Use the provider's path consistently for
+# both fixture assertions and installation markers; do not loosen ownership checks.
+$FixtureRoot = (Get-Item -LiteralPath $FixtureRoot).FullName
 $env:LOCALAPPDATA = Join-Path $FixtureRoot 'LocalAppData'
 New-Item -ItemType Directory -Path $env:LOCALAPPDATA -Force | Out-Null
 # Installer PATH tests exercise the exact ownership logic against process-local state. Production
